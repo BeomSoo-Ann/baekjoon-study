@@ -1,36 +1,32 @@
-# 1193 분수찾기
-# 1 -> 1, 2 -> 3, 2, 1 -> 1, 2, 3, 4 -> 5, 4, 3, 2, 1
+# 10250 hotel problem
+# H : 층수, W : 층 별 방 갯수, N : 손님 번호
 
-X = int(input())
-n = 1
+import sys
 
+N = int(input())
 
-def finder(n, X):
-    a = []
-    for num in range(n):
-        a.append(num+1)
+for i in range(N):
+    H, W, N = map(int, sys.stdin.readline().split())
 
-    if n % 2 == 0:
-        print(str(a[X-1])+'/'+str(a[n-X]))
+    if H == 1:
+        floor_num = 1
+        room_num = N
 
-    elif n % 2 != 0:
-        print(str(a[n-X])+'/'+str(a[X-1]))
+    elif W == 1:
+        floor_num = N
+        room_num = 1
+
+    elif H != 1 and W != 1:
+        floor_num = N % H
+        room_num = N//H + 1
+
+        if floor_num == 0:
+            floor_num = H
+            room_num -= 1
+        else:
+            pass
 
     else:
         pass
 
-
-while True:
-    try:
-        X -= n
-        n += 1
-        if X == 0:
-            print('1/1')
-        elif X <= n:
-            finder(n, X)
-            break
-        else:
-            pass
-
-    except:
-        break
+    print(floor_num*100 + room_num)
