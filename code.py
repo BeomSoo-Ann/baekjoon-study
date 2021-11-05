@@ -12,26 +12,35 @@
 
 import sys
 
-T = int(input())
-
-# found logic but no idea to create code
-
+T = int(sys.stdin.readline())
 for i in range(T):
     x, y = map(int, sys.stdin.readline().split())
     jump = y - x
 
-if jump == 0:
-    step = 0
-elif jump == 1:
-    step = 1
-elif jump == 2:
-    step = 2
-elif jump >= 3:
-    i = 1
+    if jump < 0:
+        print("error")
+    elif jump == 0:
+        step = 0
+    elif jump == 1:
+        step = 1
+    elif jump == 2:
+        step = 2
+    elif jump >= 3:
+        i = 1
 
-    while True:
-        jump -= 2*i
-        if jump > 0:
-            i += 1
-        elif jump < 0:
-            break
+        while True:
+            jump -= 2*i
+            checker = 2*i
+
+            if jump > 0:
+                i += 1
+                if jump <= i:
+                    step = 2*i - 1
+                elif jump > i:
+                    step = 2*i
+            elif jump <= 0:
+                break
+            else:
+                break
+
+    print(step)
