@@ -1,26 +1,21 @@
-M = int(input())
-N = int(input())
+# 소인수분해
+import sys
 
-tot = 0
-primeNumber_list = []
+N = sys.stdin.readline()
+i = 2
 
-
-def primeNumber(n):
-    if n == 1:
-        return False
-    for i in range(2, n):
-        if n % i == 0:
-            return False
-    return True
+if N == 1:
+    sys.exit()
 
 
-for i in range(M, N + 1):
-    if primeNumber(i):
-        tot += i
-        primeNumber_list.append(i)
-
-if tot == 0:
-    print(-1)
-else:
-    print(tot)
-    print(primeNumber_list[0])
+while True:
+    if N % i == 0 and N != i:
+        print(i)
+        N //= i
+        continue
+    elif N % i != 0:
+        i += 1
+        continue
+    elif i == N:
+        print(N)
+        break
