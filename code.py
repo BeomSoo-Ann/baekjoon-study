@@ -1,21 +1,27 @@
-# 소인수분해
 import sys
 
-N = sys.stdin.readline()
-i = 2
 
-if N == 1:
-    sys.exit()
+M, N = map(int, sys.stdin.readline().split())
 
 
-while True:
-    if N % i == 0 and N != i:
-        print(i)
-        N //= i
-        continue
-    elif N % i != 0:
-        i += 1
-        continue
-    elif i == N:
-        print(N)
-        break
+def prime_list(m, n):
+    if m == n and m > 1:
+        print((m))
+
+    sieve = [True] * n
+
+    base = int(n ** 0.5)
+
+    for i in range(2, base + 1):
+        if sieve[i] == True:
+            for j in range(i+i, n, i):
+                sieve[j] = False
+
+    base_list = [i for i in range(2, n) if sieve[i] == True]
+
+    for i in range(len(base_list)):
+        if base_list[i] >= m:
+            print(base_list[i])
+
+
+prime_list(M, N)
