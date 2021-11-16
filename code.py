@@ -4,9 +4,7 @@ import sys
 M, N = map(int, sys.stdin.readline().split())
 
 
-def prime_list(m, n):
-    if m == n and m > 1:
-        print((m))
+def prime_list(n):
 
     sieve = [True] * n
 
@@ -17,11 +15,25 @@ def prime_list(m, n):
             for j in range(i+i, n, i):
                 sieve[j] = False
 
-    base_list = [i for i in range(2, n) if sieve[i] == True]
-
-    for i in range(len(base_list)):
-        if base_list[i] >= m:
-            print(base_list[i])
+    return [i for i in range(2, n) if sieve[i] == True]
 
 
-prime_list(M, N)
+def primeNumber(n):
+    if n == 1:
+        return False
+    elif n == 2:
+        return True
+    else:
+        for i in range(2, n):
+            if n % i == 0:
+                return False
+        return True
+
+
+if M == N:
+    if primeNumber(M):
+        print(M)
+elif M < N:
+    for i in prime_list(N):
+        if i >= M:
+            print(i)
