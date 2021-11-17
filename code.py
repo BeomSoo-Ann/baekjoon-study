@@ -1,9 +1,6 @@
 import sys
 
 
-M, N = map(int, sys.stdin.readline().split())
-
-
 def prime_list(n):
 
     sieve = [True] * (n+1)
@@ -18,22 +15,15 @@ def prime_list(n):
     return [i for i in range(2, n+1) if sieve[i] == True]
 
 
-def primeNumber(n):
-    if n == 1:
-        return False
-    elif n == 2:
-        return True
-    else:
-        for i in range(2, n):
-            if n % i == 0:
-                return False
-        return True
+while True:
+    N = int(input())
+    tot = 0
 
+    if N == 0:
+        sys.exit()
 
-if M == N:
-    if primeNumber(M):
-        print(M)
-elif M < N:
-    for i in prime_list(N):
-        if i >= M:
-            print(i)
+    for i in prime_list(2*N):
+        if i > N:
+            tot += 1
+
+    print(tot)
