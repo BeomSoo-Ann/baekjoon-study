@@ -1,6 +1,3 @@
-import sys
-
-
 def prime_list(n):
 
     sieve = [True] * (n+1)
@@ -15,15 +12,27 @@ def prime_list(n):
     return [i for i in range(2, n+1) if sieve[i] == True]
 
 
-while True:
+def goldbach(n):
+    primes = prime_list(n)
+    partitions = []
+
+    for p in primes:
+        if n - p in primes:
+            if p > n-p:
+                pass
+            else:
+                partitions.append([p, n - p])
+
+    return partitions
+
+
+T = int(input())
+
+for i in range(T):
+
     N = int(input())
-    tot = 0
 
-    if N == 0:
-        sys.exit()
-
-    for i in prime_list(2*N):
-        if i > N:
-            tot += 1
-
-    print(tot)
+    if N % 2 == 0:
+        print(goldbach(N)[-1][0], goldbach(N)[-1][1])
+    else:
+        break
