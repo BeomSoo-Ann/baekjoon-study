@@ -1,38 +1,34 @@
+from sys import stdin
+
+
 def prime_list(n):
-
-    sieve = [True] * (n+1)
-
     base = int(n ** 0.5)
+    sieve = [True] * (n-1)
 
-    for i in range(2, base + 1):
+    for i in range(base-1):
         if sieve[i] == True:
-            for j in range(i+i, n+1, i):
+            for j in range(2*(i+1), n-1, i+2):
                 sieve[j] = False
 
-    return [i for i in range(2, n+1) if sieve[i] == True]
+    return [i+2 for i in range(n-1) if sieve[i] == True]
 
 
 def goldbach(n):
     primes = prime_list(n)
-    partitions = []
+    middle = prime_list(n//2)
+    middle.reverse()
 
-    for p in primes:
+    for p in middle:
         if n - p in primes:
-            if p > n-p:
-                pass
-            else:
-                partitions.append([p, n - p])
-
-    return partitions
+            return [p, n-p]
 
 
-T = int(input())
+T = int(stdin.readline())
 
 for i in range(T):
-
-    N = int(input())
+    N = int(stdin.readline())
 
     if N % 2 == 0:
-        print(goldbach(N)[-1][0], goldbach(N)[-1][1])
+        print(goldbach(N)[0], goldbach(N)[1])
     else:
-        break
+        pass
