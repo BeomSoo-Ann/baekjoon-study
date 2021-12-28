@@ -1,15 +1,15 @@
-# Goldbach Conjecture
+# Goldbach conjecture
 
-def prime(n):
-    sieve = [True] * n
+def primeNumber(N):
+    prime = True
+    prime_list = [prime] * N
 
-    base = int(n ** 0.5)
-    for i in range(2, base+1):
-        if sieve[i]:
-            for j in range(i*i, n, i):
-                sieve[j] = False
+    for i in range(2, N):
+        if prime_list[i] == True:
+            for j in range(i*i, N, i):
+                prime_list[j] = False
 
-    return [i for i in range(2, n) if sieve[i]]
+    return [i for i in range(2, N) if prime_list[i] == True]
 
 
-print(prime(100))
+print(primeNumber(100))
