@@ -1,15 +1,12 @@
-# 4153
+# 3053
 
-from sys import stdin, exit
+from sys import stdin
+from math import pi
 
-while True:
-    len_list = list(map(int, stdin.readline().split()))
+r = int(stdin.readline())
 
-    len_list.sort()
+u_circle = pi * r * r
+t_circle = float(2 * r * r)
 
-    if len_list[2]**2 == len_list[0]**2 + len_list[1]**2 and 0 not in len_list:
-        print("right")
-    elif len_list[0] == 0 and len_list[1] == 0 and len_list[2] == 0:
-        break
-    else:
-        print("wrong")
+print("{:.6f}".format(u_circle))
+print("{:.6f}".format(t_circle))
