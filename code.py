@@ -1,12 +1,25 @@
-# 3053
+# 1002
 
-from sys import stdin
-from math import pi
+from sys import stdin, exit
 
-r = int(stdin.readline())
+T = int(stdin.readline())
 
-u_circle = pi * r * r
-t_circle = float(2 * r * r)
+for i in range(T):
+    x_1, y_1, r_1, x_2, y_2, r_2 = map(int, stdin.readline().split())
 
-print("{:.6f}".format(u_circle))
-print("{:.6f}".format(t_circle))
+    t = ((x_1 - x_2) ** 2 + (y_1 - y_2) ** 2) ** 0.5
+
+    if t != 0:
+        if float(t) < float(r_1 + r_2):
+            print(2)
+        elif float(t) == float(r_1 + r_2):
+            print(1)
+        else:
+            print(0)
+    elif t == 0:
+        if r_1 == r_2:
+            print(-1)
+        elif r_1 != r_2:
+            print(0)
+    else:
+        exit()
