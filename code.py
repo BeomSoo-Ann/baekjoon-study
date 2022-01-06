@@ -1,15 +1,20 @@
-# 10872
+# 2447 별 찍기 - 10
 
 from sys import stdin
+from os import system
+
+system('clear')
 
 
-def pactorial(n):
-    if n == 0:
-        return 1
+def star(n):
+    if n == 3:
+        return [['*', '*', '*'], ['*', ' ', '*'], ['*', '*', '*']]
     else:
-        return n * pactorial(n-1)
+        pattern_1 = [star(n//3)[i] * 3 for i in range(n//3)]
+        pattern_2 = [star(n//3)[i] + [' ' * (n//3)] + star(n//3)[i]
+                     for i in range(n//3)]
+        return pattern_1 + pattern_2 + pattern_1
 
 
-N = int(stdin.readline())
-
-print(pactorial(N))
+for i in star(int(stdin.readline()))[::-1]:
+    print(''.join(i))
