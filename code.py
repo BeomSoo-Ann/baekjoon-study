@@ -8,33 +8,39 @@ from os import system
 
 system('clear')
 
+setrecursionlimit(10**6)
+
 
 def star(n):
     if n == 3:
         return ['***', '* *', '***']
 
     else:
-        star(n//3)
+        stars = star(n//3)
 
-        pattern_1 = []
-        pattern_2 = []
+        pattern = []
 
-        for i in range(n//3):
-            pattern_1.append(star(n//3)[i] * 3)
-            pattern_2.append(star(n//3)[i] + ' ' * (n//3) + star(n//3)[i])
+        for s in stars:
+            pattern.append(s*3)
+        for s in stars:
+            pattern.append(s+' '*(n//3)+s)
+        for s in stars:
+            pattern.append(s*3)
 
-        return pattern_1 + pattern_2 + pattern_1
-
-
-# N = int(stdin.readline())
-#
-# for j in star(N):
-#     print(''.join(j))
-#
-###################################################################################
+        return pattern
 
 
-setrecursionlimit(10**6)
+N = int(stdin.readline())
+
+for j in star(N):
+    print(''.join(j))
+
+
+#########################
+#########################
+####### Reference #######
+#########################
+#########################
 
 
 def append_star(LEN):
@@ -54,5 +60,5 @@ def append_star(LEN):
     return L
 
 
-n = int(stdin.readline().strip())
-print('\n'.join(append_star(n)))
+# n = int(stdin.readline().strip())
+# print('\n'.join(append_star(n)))
