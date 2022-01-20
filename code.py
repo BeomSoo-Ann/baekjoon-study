@@ -1,27 +1,29 @@
-# 11729 Hanoi Tower
+# 2798 Black Jack
 
 from sys import stdin
+from itertools import combinations
 
-step = []
+N, M = map(int, stdin.readline().split())
 
-
-def move_hanoi(n, start, end, temp):
-
-    if n == 1:
-        step.append([start, end])
-    else:
-        move_hanoi(n-1, start, temp, end)
-        step.append([start, end])
-        move_hanoi(n-1, temp, end, start)
-
-    return step
+CARD_LIST = list(map(int, stdin.readline().split()))
+CARD_LIST.sort()
 
 
-N = int(stdin.readline())
+CARD_SUM_LIST = [sum(i) for i in list(combinations(CARD_LIST, 3))]
 
-move_map = move_hanoi(N, 1, 3, 2)
 
-print(len(move_map))
+def find_closest():
+    base = 0
+    for i in CARD_SUM_LIST:
+        if i > M:
+            pass
+        else:
+            if i > base:
+                base = i
+            else:
+                pass
 
-for i in move_map:
-    print(i[0], i[1])
+    return base
+
+
+print(find_closest())
