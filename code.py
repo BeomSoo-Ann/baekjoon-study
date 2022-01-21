@@ -1,29 +1,22 @@
-# 2798 Black Jack
+# 2231 분해합
+# N = a//base + a//(base-1) + ... + a//1
 
 from sys import stdin
-from itertools import combinations
 
-N, M = map(int, stdin.readline().split())
+N = int(stdin.readline())
+base = len(str(N))
 
-CARD_LIST = list(map(int, stdin.readline().split()))
-CARD_LIST.sort()
+for i in range(1, N+1):
+    SUM = sum(map(int, str(i)))
+    i_sum = i + SUM
 
+    if i_sum == N:
+        print(i)
+        break
 
-CARD_SUM_LIST = [sum(i) for i in list(combinations(CARD_LIST, 3))]
+    elif i == N:
+        print(0)
+        break
 
-
-def find_closest():
-    base = 0
-    for i in CARD_SUM_LIST:
-        if i > M:
-            pass
-        else:
-            if i > base:
-                base = i
-            else:
-                pass
-
-    return base
-
-
-print(find_closest())
+    else:
+        pass
