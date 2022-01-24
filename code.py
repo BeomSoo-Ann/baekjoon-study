@@ -4,26 +4,25 @@ from sys import stdin
 
 M, N = map(int, stdin.readline().split())
 
+BASE_B = [['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'], ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'], ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'], ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'], [
+    'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'], ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'], ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'], ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B']]
+BASE_W = [['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'], ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'], ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'], ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'], [
+    'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'], ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'], ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'], ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W']]
+
 SQUARE = [list(map(str, stdin.readline().strip())) for _ in range(M)]
-BASE = []
-
-for i in range(1, M+1):
-    L = []
-    for j in range(1, N+1):
-        if i % 2 == 1 and j % 2 == 1:
-            L.append('B')
-        elif i % 2 == 1 and j % 2 == 0:
-            L.append('W')
-        elif i % 2 == 0 and j % 2 == 1:
-            L.append('W')
-        elif i % 2 == 0 and j % 2 == 0:
-            L.append('B')
-    BASE.append(L)
-
-print(BASE)
 
 
-def COUNT_ERROR(BOARD):
-    for line in BOARD:
-        for sqr in line:
-            return
+def COUNT_ERROR(BOARD, BASE):
+    cnt = 0
+    for i in range(8):
+        cnt = 0
+        for j in range(8):
+            if BOARD[i][j] != BASE[i][j]:
+                cnt += 1
+            else:
+                pass
+    return cnt
+
+
+def MAKE_8X8(BOARD, row_start, col_start):
+    NEW_BOARD = []
