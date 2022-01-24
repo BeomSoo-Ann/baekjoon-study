@@ -1,18 +1,29 @@
-# 7568 덩치
+# 1018 Chess coloring
 
 from sys import stdin
 
-N = int(stdin.readline())
+M, N = map(int, stdin.readline().split())
 
-PARTY = [list(map(int, stdin.readline().split())) for i in range(N)]
+SQUARE = [list(map(str, stdin.readline().strip())) for _ in range(M)]
+BASE = []
 
-for HUMAN_1 in PARTY:
-    ORDER = 1
+for i in range(1, M+1):
+    L = []
+    for j in range(1, N+1):
+        if i % 2 == 1 and j % 2 == 1:
+            L.append('B')
+        elif i % 2 == 1 and j % 2 == 0:
+            L.append('W')
+        elif i % 2 == 0 and j % 2 == 1:
+            L.append('W')
+        elif i % 2 == 0 and j % 2 == 0:
+            L.append('B')
+    BASE.append(L)
 
-    for HUMAN_2 in PARTY:
-        if HUMAN_2[0] > HUMAN_1[0] and HUMAN_2[1] > HUMAN_1[1]:
-            ORDER += 1
-        else:
-            pass
+print(BASE)
 
-    print(ORDER, end=' ')
+
+def COUNT_ERROR(BOARD):
+    for line in BOARD:
+        for sqr in line:
+            return
