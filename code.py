@@ -12,10 +12,11 @@ L = len(num_list)
 maxi = max(num_list)
 
 
-count_base = [0] * (maxi + 1)
+count_base = []
 
 for i in range(L):
-    count_base[num_list[i]] += 1
+    order = num_list.count(i)
+    count_base.append(order)
 
 
 count_sum = []
