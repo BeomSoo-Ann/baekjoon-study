@@ -1,17 +1,19 @@
-# No.1181
+# No.18870 narrow down the location
 
-from sys import stdin, stdout
+from sys import stdin
+
 
 N = int(stdin.readline())
-word_list = []
+loc_list = list(map(int, stdin.readline().split()))
+sorted_list = sorted(set(loc_list))
 
-for _ in range(N):
-    word = stdin.readline().strip()
-    
-    if word not in word_list:
-        word_list.append(word)
-        
-sorted_list = sorted(word_list, key = lambda x: (len(x), x))
+loc_dict = {}
+order = 0
 
-for word in sorted_list:
-    stdout.write(word + '\n')
+for i in sorted_list:
+    loc_dict[i] = order
+    order += 1
+
+
+for i in loc_list:
+    print(loc_dict[i], end=' ')
