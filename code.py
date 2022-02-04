@@ -1,4 +1,4 @@
-# 11650 Sort the Locations
+# 11651 Sort the Locations 2
 
 from sys import stdin
 
@@ -6,7 +6,7 @@ N = int(stdin.readline())
 
 Loc_list = [list(map(int, stdin.readline().split())) for _ in range(N)]
 
-sorted_list = sorted(Loc_list, key=lambda x: (x[0], x[1]))
+sorted_list = sorted(Loc_list, key=lambda x: (x[1], x[0]))
 
 for i in sorted_list:
     print(i[0], i[1])
