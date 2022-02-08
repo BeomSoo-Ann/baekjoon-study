@@ -1,4 +1,4 @@
-# No.15650
+# No.15651
 
 from sys import stdin
 
@@ -12,16 +12,13 @@ def backtracking_num():
         return
 
     for i in range(1, N+1):
-        if i in L:
-            continue
-
+        # if i in L:
+        #     continue
         L.append(i)
-
-        if len(L) != 1:
-            if L[-1] < L[-2]:
-                L.pop()
-                continue
-
+        # if len(L) != 1:
+        #     if L[-1] < L[-2]:
+        #         L.pop()
+        #         continue
         backtracking_num()
         L.pop()
 
