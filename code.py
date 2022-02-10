@@ -1,28 +1,16 @@
-# No.15652
+# No.9663 N-Queen
 
 from sys import stdin
 
-N, M = map(int, stdin.readline().split())
-L = []
+N = int(stdin.readline())
+L = [[i for i in range(1, N+1)] for _ in range(N)]
 
 
-def backtracking_num():
-    if len(L) == M:
-        print(' '.join(map(str, L)))
+def backtrack_queen():
+    if len(L) == N:
         return
 
-    for i in range(1, N+1):
-        # if i in L:
-        #     continue
-        L.append(i)
-
-        if len(L) != 1:
-            if L[-1] < L[-2]:
-                L.pop()
-                continue
-
-        backtracking_num()
+    for _ in range(N):
+        L.append()
+        backtrack_queen()
         L.pop()
-
-
-backtracking_num()
