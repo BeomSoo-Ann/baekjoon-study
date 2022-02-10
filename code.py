@@ -3,14 +3,38 @@
 from sys import stdin
 
 N = int(stdin.readline())
-L = [[i for i in range(1, N+1)] for _ in range(N)]
+L = []
+cnt = 0
+
+
+def check_available(x):
+    x_index = L.index(x)
+
+    for i in range(x_index):
+        if abs(i-x_index) == abs(L[i]-x):
+            return True
 
 
 def backtrack_queen():
+    global cnt
+
     if len(L) == N:
+        cnt += 1
         return
 
-    for _ in range(N):
-        L.append()
+    for loc in range(N):
+        if loc in L:
+            continue
+
+        L.append(loc)
+
+        if check_available(loc):
+            L.pop()
+            continue
+
         backtrack_queen()
         L.pop()
+
+
+backtrack_queen()
+print(cnt)
