@@ -1,4 +1,4 @@
-# No.14889 plus minus multiply divide
+# No.14889 team battle
 
 from sys import stdin
 
