@@ -1,35 +1,76 @@
-# No.14888 plus minus multiply divide
+# No.14889 plus minus multiply divide
 
 from sys import stdin
 
 
 N = int(stdin.readline())
-#teamstate_list = [list(map(int, stdin.readline().split())) for _ in range(N)]
-# print(teamstate_list)
+teamstate_list = [list(map(int, stdin.readline().split())) for _ in range(N)]
 L = []
-L_list = []
+mem_list = []
+start_score = []
+link_score = []
 
 
-def backtrace():
-    global L
+def check_score(L):
+    score = 0
+    for i in range(len(L)-1):
+        for j in range(i+1, len(L)):
+            score += teamstate_list[L[i]][L[j]] + teamstate_list[L[j]][L[i]]
+    return score
+
+
+def backtrace_start():
     if len(L) == N//2:
-        print(L)
+        start_score.append(check_score(L))
         return
 
     for i in range(N):
-        if i+1 in L:
+        if i in L:
             continue
-        L.append(i+1)
+
+        if len(L) == 1:
+            if L[0] != 0:
+                continue
+
+        L.append(i)
 
         if len(L) != 1:
             if L[-1] < L[-2]:
                 L.pop()
                 continue
-
-        backtrace()
-        L_list.append(L)
+        backtrace_start()
         L.pop()
 
 
-backtrace()
-print(L_list)
+def backtrace_link():
+    if len(L) == N//2:
+        link_score.append(check_score(L))
+        return
+
+    for i in range(N):
+        if i in L:
+            continue
+
+        if len(L) == 1:
+            if L[0] == 0:
+                continue
+
+        L.append(i)
+
+        if len(L) != 1:
+            if L[-1] < L[-2]:
+                L.pop()
+                continue
+        backtrace_link()
+        L.pop()
+
+
+backtrace_start()
+backtrace_link()
+link_score.reverse()
+
+sub_list = []
+for i in range(len(link_score)):
+    sub_list.append(abs(link_score[i] - start_score[i]))
+
+print(min(sub_list))
