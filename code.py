@@ -14,8 +14,14 @@ def w(a, b, c):
     elif a == b == c:
         return 2**a
     
-    elif a < b < c:
+    elif b > c:
+        return w(a, c, b)
+    
+    elif a < b and b < c:
         return w(a, b, c-1) + w(a, b-1, c-1) - w(a, b-1, c)
+    
+    elif a == 1:
+        return 2
     
     else:
         return w(a-1, b, c) + w(a-1, b-1, c) + w(a-1, b, c-1) - w(a-1, b-1, c-1)
