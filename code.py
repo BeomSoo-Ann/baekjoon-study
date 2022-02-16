@@ -1,41 +1,31 @@
-# No.1003 fibonacci
+# No.9184
 
 from sys import stdin, stdout
 
 
-T = int(stdin.readline())
 
-
-<<<<<<< Updated upstream
-def fibonacci(n):
-    if n == 0:
-        return 0
-    elif n == 1:
+def w(a, b, c):
+    if a <=0 or b <= 0 or c <= 0:
         return 1
+    
+    elif a > 20 or b > 20 or c > 20:
+        return 1048576
+    
+    elif a == b == c:
+        return 2**a
+    
+    elif a < b < c:
+        return w(a, b, c-1) + w(a, b-1, c-1) - w(a, b-1, c)
+    
     else:
-        return fibonacci(n-1) + fibonacci(n-2)
+        return w(a-1, b, c) + w(a-1, b-1, c) + w(a-1, b, c-1) - w(a-1, b-1, c-1)
 
 
-for _ in range(T):
-    N = int(stdin.readline())
-    if N == 0:
-        print(1, 0)
-        continue
-    print(fibonacci(N-1), fibonacci(N))
-=======
-zero = [1, 0, 1]
-one = [0, 1, 1]
-
-
-def fibonacci(num):
-    length = len(zero)
-    if num >= length:
-        for i in range(length, num+1):
-            zero.append(zero[i-1] + zero[i-2])
-            one.append(one[i-1] + one[i-2])
-    print('{} {}'.format(zero[num], one[num]))
-
-
-for _ in range(T):
-    fibonacci(int(stdin.readline()))
->>>>>>> Stashed changes
+while True:
+    A, B, C = map(int, stdin.readline().split())
+    if A == B == C == -1:
+        break
+    
+    print(w(A, B, C))
+    
+    
