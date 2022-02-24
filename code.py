@@ -1,36 +1,35 @@
-# No.9184
+# No.1904 tile
 
-from sys import stdin, stdout
+from sys import stdin
+from math import factorial
 
-dp = [[[0]*21 for _ in range(21)] for _ in range(21)]
+
+N = int(stdin.readline())
+dub_zero = N//2
 
 
-def w(a, b, c):
-
-    if a <= 0 or b <= 0 or c <= 0:
+def make_tile(n):
+    if n == 0:
         return 1
 
-    elif a > 20 or b > 20 or c > 20:
-        return 1048576
+    if n == 1:
+        return N-1
 
-    elif dp[a][b][c]:
-        return dp[a][b][c]
+    if N % 2 == 0:
+        if n == dub_zero:
+            return 1
 
-    elif a == b == c:
-        return 2**a
+    if N % 2 == 1:
+        if n == dub_zero:
+            return dub_zero+1
 
-    elif a < b < c:
-        dp[a][b][c] = w(a, b, c-1) + w(a, b-1, c-1) - w(a, b-1, c)
-        return dp[a][b][c]
-
-    dp[a][b][c] = w(a-1, b, c) + w(a-1, b-1, c) + \
-        w(a-1, b, c-1) - w(a-1, b-1, c-1)
-    return dp[a][b][c]
+    num = factorial(N-n) // (factorial(n)*factorial(N-n-n))
+    return num
 
 
-while True:
-    A, B, C = map(int, stdin.readline().split())
-    if A == B == C == -1:
-        break
+tot = 0
 
-    print(f"w({A}, {B}, {C}) = {w(A, B, C)}")
+for i in range(dub_zero+1):
+    tot += make_tile(i)
+
+print(tot % 15746)
