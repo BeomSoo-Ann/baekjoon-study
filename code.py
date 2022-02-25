@@ -1,11 +1,26 @@
 # No.1904 tile
 
-from sys import stdin
-from math import factorial
+from sys import stdin, setrecursionlimit
+setrecursionlimit(10**6)
 
 
 N = int(stdin.readline())
 dub_zero = N//2
+cache = {}
+
+
+def factorial(n):
+    global cache
+    if n == 1:
+        cache[n] = 1
+        return 1
+
+    if n in cache:
+        return cache[n]
+
+    cache[n] = n * factorial(n-1)
+
+    return n*factorial(n-1)
 
 
 def make_tile(n):
