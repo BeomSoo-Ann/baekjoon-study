@@ -1,50 +1,30 @@
-# No.1904 tile
+# No.9461 triangle
 
-from sys import stdin, setrecursionlimit
-setrecursionlimit(10**6)
-
-
-N = int(stdin.readline())
-dub_zero = N//2
-cache = {}
+from sys import stdin
 
 
-def factorial(n):
-    global cache
-    if n == 1:
-        cache[n] = 1
-        return 1
+base = [0] * 100
 
-    if n in cache:
-        return cache[n]
+base[0] = 1
+base[1] = 1
+base[2] = 1
+base[3] = 2
+base[4] = 2
+base[5] = 3
+base[6] = 4
+base[7] = 5
+base[8] = 7
+base[9] = 9
 
-    cache[n] = n * factorial(n-1)
+T = int(stdin.readline())
 
-    return n*factorial(n-1)
+for _ in range(T):
+    N = int(stdin.readline())
 
+    if N <= 10:
+        print(base[N-1])
+        continue
 
-def make_tile(n):
-    if n == 0:
-        return 1
-
-    if n == 1:
-        return N-1
-
-    if N % 2 == 0:
-        if n == dub_zero:
-            return 1
-
-    if N % 2 == 1:
-        if n == dub_zero:
-            return dub_zero+1
-
-    num = factorial(N-n) // (factorial(n)*factorial(N-n-n))
-    return num
-
-
-tot = 0
-
-for i in range(dub_zero+1):
-    tot += make_tile(i)
-
-print(tot % 15746)
+    for i in range(10, N):
+        base[i] = base[i-1] + base[i-5]
+    print(base[N-1])
