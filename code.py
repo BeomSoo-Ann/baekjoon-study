@@ -1,30 +1,45 @@
-# No.9461 triangle
+# No.1149 RGB street
 
 from sys import stdin
 
 
-base = [0] * 100
+N = int(stdin.readline())
+base = [None] * N
 
-base[0] = 1
-base[1] = 1
-base[2] = 1
-base[3] = 2
-base[4] = 2
-base[5] = 3
-base[6] = 4
-base[7] = 5
-base[8] = 7
-base[9] = 9
+for i in range(N):
+    RGB_list = list(map(int, stdin.readline().split()))
+    base[i] = RGB_list
 
-T = int(stdin.readline())
+L = []
+sum_list = []
 
-for _ in range(T):
-    N = int(stdin.readline())
 
-    if N <= 10:
-        print(base[N-1])
-        continue
+def make_index():
+    global L
+    if len(L) == N:
+        # sum_list.append(make_sum(L))
+        print(L)
+        return
 
-    for i in range(10, N):
-        base[i] = base[i-1] + base[i-5]
-    print(base[N-1])
+    for i in range(3):
+        L.append(i)
+        if len(L) != 1:
+            if L[-1] == L[-2]:
+                L.pop()
+                continue
+
+        make_index()
+        L.pop()
+
+
+def make_sum(list):
+    n = 0
+    tot = 0
+    for i in list:
+        tot += base[n][i]
+        n += 1
+    return tot
+
+
+make_index()
+print(min(sum_list))
