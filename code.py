@@ -1,28 +1,27 @@
-# No.1149 RGB street
+# No.2579 stairs
 
 from sys import stdin
 
 
 N = int(stdin.readline())
-tri = [list(map(int, stdin.readline().split())) for _ in range(N)]
+stair = [0] * 300
+for i in range(N):
+    stair[i] = int(stdin.readline())
+
+dp = [0] * 300
+
+dp[0] = stair[0]
+dp[1] = stair[0] + stair[1]
+dp[2] = stair[2] + max(dp[1], dp[0])
 
 if N == 1:
-    print(tri[0][0])
-    exit()
+    print(dp[0])
+elif N == 2:
+    print(dp[1])
+elif N == 3:
+    print(dp[2])
+else:
+    for i in range(3, N):
+        dp[i] = stair[i] + max(dp[i-2], dp[i-3]+stair[i-1])
 
-
-tri[1][0] += tri[0][0]
-tri[1][1] += tri[0][0]
-
-
-for i in range(2, N):
-    for j in range(i+1):
-        if j == 0:
-            tri[i][j] += tri[i-1][j]
-        elif j == i:
-            tri[i][j] += tri[i-1][j-1]
-        else:
-            tri[i][j] += max(tri[i-1][j-1], tri[i-1][j])
-
-
-print(max(tri[-1]))
+    print(dp[N-1])
