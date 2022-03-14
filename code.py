@@ -4,12 +4,25 @@ from sys import stdin
 
 
 N = int(stdin.readline())
-cache = [list(map(int, stdin.readline().split())) for _ in range(N)]
+tri = [list(map(int, stdin.readline().split())) for _ in range(N)]
+
+if N == 1:
+    print(tri[0][0])
+    exit()
 
 
-for i in range(1, N):
-    cache[i][0] += min(cache[i-1][1], cache[i-1][2])
-    cache[i][1] += min(cache[i-1][0], cache[i-1][2])
-    cache[i][2] += min(cache[i-1][0], cache[i-1][1])
+tri[1][0] += tri[0][0]
+tri[1][1] += tri[0][0]
 
-print(min(cache[-1]))
+
+for i in range(2, N):
+    for j in range(i+1):
+        if j == 0:
+            tri[i][j] += tri[i-1][j]
+        elif j == i:
+            tri[i][j] += tri[i-1][j-1]
+        else:
+            tri[i][j] += max(tri[i-1][j-1], tri[i-1][j])
+
+
+print(max(tri[-1]))
