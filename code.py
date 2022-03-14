@@ -22,6 +22,8 @@ elif N == 3:
     print(dp[2])
 else:
     for i in range(3, N):
-        dp[i] = stair[i] + max(dp[i-2], dp[i-3]+stair[i-1])
+        dp[i] = max(stair[i]+dp[i-2], stair[i]+dp[i-3]+stair[i-1])
 
+    print(dp)
     print(dp[N-1])
+    
