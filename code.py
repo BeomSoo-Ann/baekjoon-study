@@ -1,24 +1,17 @@
-# No.2156 Wine tasting
+# No.11053 longest increasing sequence
 
 
 from sys import stdin
 
 
 N = int(stdin.readline())
-wines = [int(stdin.readline()) for _ in range(N)]
-dp = [0] * 10001
+base = list(map(int, stdin.readline().split()))
 
-if N == 1:
-    print(wines[0])
-elif N == 2:
-    print(wines[0] + wines[1])
-else:
-    dp[0] = wines[0]
-    dp[1] = wines[0] + wines[1]
-    dp[2] = max(wines[0] + wines[2], wines[1] + wines[2])
+dp = [1] * N
 
-    for i in range(3, N):
-        dp[i] = max(dp[i-2]+wines[i], max(dp[:i-2]) +
-                    wines[i-1]+wines[i], max(dp))
+for i in range(1, N):
+    for j in range(i):
+        if base[i] > base[j]:
+            dp[i] = max(dp[i], dp[j] + 1)
 
-    print(max(dp))
+print(max(dp))
