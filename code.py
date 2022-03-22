@@ -5,26 +5,25 @@ from sys import stdin
 
 
 N = int(stdin.readline())
-base = list(map(int, stdin.readline().split()))
-reverse_base = base[::-1]
-
-dp = [1] * N
-reverse_dp = [1] * N
-
-for i in range(1, N):
-    for j in range(i):
-        if base[i] > base[j]:
-            dp[i] = max(dp[i], dp[j]+1)
-
-for i in range(1, N):
-    for j in range(i):
-        if reverse_base[i] > reverse_base[j]:
-            reverse_dp[i] = max(reverse_dp[i], reverse_dp[j]+1)
-
-result = [0] * N
-
-for i in range(N):
-    result[i] = dp[i] + reverse_dp[N-i-1] - 1
+wire = [list(map(int, stdin.readline().split())) for _ in range(N)]
+L = []
 
 
-print(max(result))
+def check_wire():
+    for i in range(N):
+        if len(L) == 0:
+            L.append(wire[i])
+            check_wire()
+            L.pop()
+
+        elif len(L) != 0:
+            if wire[i] in L:
+                continue
+
+            if L[-1][0] < wire[i][0] and L[-1][1] < wire[i][1]:
+                L.append(wire[i])
+                check_wire()
+                L.pop()
+
+
+check_wire()
