@@ -3,27 +3,29 @@
 
 from sys import stdin
 
+from aem import con
+
 
 N = int(stdin.readline())
 wire = [list(map(int, stdin.readline().split())) for _ in range(N)]
 L = []
+print(wire)
+
+base = wire
 
 
 def check_wire():
-    for i in range(N):
-        if len(L) == 0:
-            L.append(wire[i])
-            check_wire()
-            L.pop()
-
-        elif len(L) != 0:
-            if wire[i] in L:
+    for line in wire:
+        for i in wire:
+            if line == i:
                 continue
 
-            if L[-1][0] < wire[i][0] and L[-1][1] < wire[i][1]:
-                L.append(wire[i])
-                check_wire()
-                L.pop()
+            if line[0] < i[0] and line[1] > i[1]:
+                print(i)
+            elif line[0] > i[0] and line[1] < i[1]:
+                print(i)
+            else:
+                continue
 
 
 check_wire()
