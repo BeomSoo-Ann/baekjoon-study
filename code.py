@@ -3,29 +3,18 @@
 
 from sys import stdin
 
-from aem import con
-
 
 N = int(stdin.readline())
 wire = [list(map(int, stdin.readline().split())) for _ in range(N)]
-L = []
-print(wire)
+wire.sort()
 
-base = wire
-
-
-def check_wire():
-    for line in wire:
-        for i in wire:
-            if line == i:
-                continue
-
-            if line[0] < i[0] and line[1] > i[1]:
-                print(i)
-            elif line[0] > i[0] and line[1] < i[1]:
-                print(i)
-            else:
-                continue
+end_point = [wire[i][1] for i in range(N)]
+dp = [1] * N
 
 
-check_wire()
+for i in range(1, N):
+    for j in range(i):
+        if end_point[i] > end_point[j]:
+            dp[i] = max(dp[i], dp[j] + 1)
+
+print(N - max(dp))
