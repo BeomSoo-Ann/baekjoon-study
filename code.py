@@ -1,20 +1,22 @@
-# No.11054 longest "bytonic" increasing sequence
+# No.9251 Longest Common Subsequence
 
 
 from sys import stdin
 
 
-N = int(stdin.readline())
-wire = [list(map(int, stdin.readline().split())) for _ in range(N)]
-wire.sort()
+str_list = [stdin.readline().strip() for _ in range(2)]
+L = []
 
-end_point = [wire[i][1] for i in range(N)]
-dp = [1] * N
+for i in str_list[0]:
+    for j in range(len(str_list[1])):
+        if i == str_list[1][j]:
+            L.append(j)
 
+dp = [1] * len(L)
 
-for i in range(1, N):
+for i in range(1, len(L)):
     for j in range(i):
-        if end_point[i] > end_point[j]:
-            dp[i] = max(dp[i], dp[j] + 1)
+        if L[i] > L[j]:
+            dp[i] = max(dp[i], dp[j]+1)
 
-print(N - max(dp))
+print(max(dp))
