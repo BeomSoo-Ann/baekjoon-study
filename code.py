@@ -5,18 +5,15 @@ from sys import stdin
 
 
 str_list = [stdin.readline().strip() for _ in range(2)]
-L = []
+dp = [0] * len(str_list[0])
 
-for i in str_list[0]:
-    for j in range(len(str_list[1])):
-        if i == str_list[1][j]:
-            L.append(j)
+for i in range(len(str_list[1])):
+    cnt = 0
+    for j in range(len(str_list[0])):
+        if dp[j] > cnt:
+            cnt = dp[j]
 
-dp = [1] * len(L)
+        if str_list[1][i] == str_list[0][j]:
+            dp[j] = cnt + 1
 
-for i in range(1, len(L)):
-    for j in range(i):
-        if L[i] > L[j]:
-            dp[i] = max(dp[i], dp[j]+1)
-
-print(max(dp))
+print(dp)
