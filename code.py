@@ -1,19 +1,12 @@
-# No.9251 Longest Common Subsequence
-
+# No.1912
 
 from sys import stdin
 
+N = int(stdin.readline())
+num_list = list(map(int, stdin.readline().split()))
 
-str_list = [stdin.readline().strip() for _ in range(2)]
-dp = [0] * len(str_list[0])
 
-for i in range(len(str_list[1])):
-    cnt = 0
-    for j in range(len(str_list[0])):
-        if dp[j] > cnt:
-            cnt = dp[j]
+for i in range(N):
+    num_list[i] = max(num_list[i], num_list[i] + num_list[i-1])
 
-        if str_list[1][i] == str_list[0][j]:
-            dp[j] = cnt + 1
-
-print(dp)
+print(max(num_list))
