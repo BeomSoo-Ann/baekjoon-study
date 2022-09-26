@@ -1,40 +1,40 @@
-# No.1912
+# 10815 Number Card
 
 from sys import stdin
 
-
-N, K = map(int, stdin.readline().split())
-baggage = [list(map(int, stdin.readline().split())) for _ in range(N)]
-# 무게 순으로 정렬함
-baggage.sort(key=lambda x: x[0])
-L = []
-total_weight = 0
+N = stdin.readline()
+CARD = list(map(str, stdin.readline().split()))
 
 
-print(baggage)
+M = stdin.readline()
+BASE = list(map(str, stdin.readline().split()))
 
-# 무게 순으로 정렬 후에
-# Max Weight - First item weight를 해서 남은 무게를 저장
-# 남은 무게보다 물품 무게가 크면 스킵
+a = 0
 
 
-def dfs():
-    global total_weight
+def dfs(list_1):
+    global a
+    a += 1
+    print(a)
 
-    if total_weight > K:
+    if a >= len(CARD):
         return
 
-    for i in range(N):
-        if baggage[i] in L:
-            continue
+    for i in BASE:
+        print(i)
+        try:
+            if i in list_1:
 
-        L.append(baggage[i])
+                dfs(list_1[a])
+            else:
+                dfs(list_1[a])
 
-        if len(L) != 1:
-            if baggage.index(L[-2]) > baggage.index(L[-1]):
-                L.pop()
-                continue
+        except:
+            return
+    return
 
-        total_weight = sum([item[0] for item in L])
-        dfs()
-        L.pop()
+
+dfs(CARD)
+
+
+print(ANS)
